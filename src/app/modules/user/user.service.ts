@@ -31,7 +31,7 @@ const createStudent = async (
   // set role
   user.role = 'student';
 
-  const academicsemester = await AcademicSemester.findById(
+  const academicSemester = await AcademicSemester.findById(
     student.academicSemester
   ).lean();
 
@@ -40,7 +40,7 @@ const createStudent = async (
   try {
     session.startTransaction();
     // generate student id
-    const id = await generateStudentId(academicsemester as IAcademicSemester);
+    const id = await generateStudentId(academicSemester as IAcademicSemester);
     // set custom id into both  student & user
     user.id = id;
     student.id = id;
@@ -86,9 +86,11 @@ const createStudent = async (
       ],
     });
   }
-
   if (newUserAllData) {
-    await RedisClient.publish(EVENT_STUDENT_CREATED, JSON.stringify(newUserAllData.student))
+    await RedisClient.publish(
+      EVENT_STUDENT_CREATED,
+      JSON.stringify(newUserAllData.student)
+    );
   }
 
   return newUserAllData;
@@ -102,7 +104,6 @@ const createFaculty = async (
   if (!user.password) {
     user.password = config.default_faculty_pass as string;
   }
-
   // set role
   user.role = 'faculty';
 
@@ -151,10 +152,13 @@ const createFaculty = async (
         },
       ],
     });
-  };
+  }
 
   if (newUserAllData) {
-    await RedisClient.publish(EVENT_FACULTY_CREATED, JSON.stringify(newUserAllData.faculty));
+    await RedisClient.publish(
+      EVENT_FACULTY_CREATED,
+      JSON.stringify(newUserAllData.faculty)
+    );
   }
 
   return newUserAllData;

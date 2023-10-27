@@ -103,11 +103,11 @@ const updateAdmin = async (
 };
 
 const deleteAdmin = async (id: string): Promise<IAdmin | null> => {
-  // check if the faculty is exist
+  // check if the Admin is exist
   const isExist = await Admin.findOne({ id });
 
   if (!isExist) {
-    throw new ApiError(httpStatus.NOT_FOUND, 'Faculty not found !');
+    throw new ApiError(httpStatus.NOT_FOUND, 'Admin not found !');
   }
 
   const session = await mongoose.startSession();
