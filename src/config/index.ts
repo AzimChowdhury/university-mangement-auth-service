@@ -20,6 +20,9 @@ export default {
   },
   redis: {
     url: process.env.REDIS_URL,
-    expires_in: process.env.REDIS_TOKEN_EXPIRES_IN
-  }
+    expires_in: process.env.REDIS_TOKEN_EXPIRES_IN,
+  },
+  email: process.env.EMAIL,
+  appPass: process.env.GOOGLE_APP_PASSWORD,
+  resetLink: process.env.RESET_PASS_UI_LINK,
 };
