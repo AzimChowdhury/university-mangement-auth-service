@@ -172,7 +172,7 @@ const forgotPass = async (payload: { id: string }) => {
   const passResetToken = await jwtHelpers.createResetToken(
     { id: user.id },
     config.jwt.secret as string,
-    '50m'
+    '10m'
   );
 
   const resetLink: string = config.resetLink + `token=${passResetToken}`;
